@@ -1,0 +1,10 @@
+POST https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706 HTTP/1.1
+content-type: application/json
+
+{
+    "applicationId": "1056775690377075202",
+    "hits": "30",
+    "shopCode": "e-kurashi",
+    "page": "1",
+    "postageFlag": "1"
+}
