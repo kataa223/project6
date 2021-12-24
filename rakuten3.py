@@ -1,24 +1,20 @@
-# 課題6-2：任意のキーワードでAPI検索した場合
-
-#coding:utf-8
-import csv
+# ------------------------------------------------------------------
+# 課題6-6：楽天APIにより任意の商品の最安値と最高値を取得する
+# ------------------------------------------------------------------
 import sys
-import codecs
-import math
-import random
 import requests
-from time import sleep
-import re
+
+RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/Product/Search/20170426'
+APP_ID = '###'
 
 args = sys.argv
 keyWord = args[1]
 
-url = 'https://app.rakuten.co.jp/services/api/Product/Search/20170426'
 payload = {
-    'applicationId': 1056775690377075202,
+    'applicationId': APP_ID,
     'keyword': keyWord ,#検索するキーワード
     }
-r = requests.get(url, params=payload)
+r = requests.get(RAKUTEN_API_URL, params=payload)
 resp = r.json()
 
 counter = 0

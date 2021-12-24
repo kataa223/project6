@@ -1,28 +1,23 @@
-# 参考ページの例
-
-#coding:utf-8
-import csv
+# ------------------------------------------------------------------
+# 課題6-1：楽天APIを実行して結果が返ってくることを確認する
+# ------------------------------------------------------------------
 import sys
-import codecs
-import math
-import random
 import requests
-from time import sleep
-import re
+
+APP_ID = '###'
+RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
 
 args = sys.argv
 shopName = args[1]
 
-
-url = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
 payload = {
-    'applicationId': 1056775690377075202,
+    'applicationId': APP_ID,
     'hits': 30,#一度のリクエストで返してもらう最大個数（MAX30)
     'shopCode': shopName ,#ショップID
     'page':1,#何ページ目か
     'postageFlag':1,#送料込みの商品に限定
     }
-r = requests.get(url, params=payload)
+r = requests.get(RAKUTEN_API_URL, params=payload)
 resp = r.json()
 total = int(resp['count'])
 Max = total/30 + 1

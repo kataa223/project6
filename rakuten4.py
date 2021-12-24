@@ -1,32 +1,29 @@
-# 課題6-4 ランキング
-
-#coding:utf-8
+# ------------------------------------------------------------------
+# 課題6-4：楽天APIにより取得したランキング一覧をcsv出力する
+# ------------------------------------------------------------------
 import csv
 import sys
-import codecs
-import math
-import random
 import requests
-from time import sleep
-import re
+
+RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628'
+APP_ID = '###'
 
 args = sys.argv
 genreId = args[1]
 
-url = 'https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628'
 payload = {
-    'applicationId': 1056775690377075202,
+    'applicationId': APP_ID,
     'genreId': genreId ,#ジャンルID
     }
-r = requests.get(url, params=payload)
+r = requests.get(RAKUTEN_API_URL, params=payload)
 resp = r.json()
 
-counter = 0
+result = ""
 for items in resp['Items']:
     item = items['Item']
-    print("-------------------------------------------")
-    print('【rank】' + str(item['rank']))
-    print('【itemName】' + item['itemName'])
-    print('【itemCode】' + item['itemCode'])
+    result += "-------------------------------------------\n"
+    result += '【rank】' + str(item['rank']) + "\n"
+    result += '【itemName】' + item['itemName'] + "\n"
+    result += '【itemCode】' + item['itemCode'] + "\n"
     
-    
+# csv出力

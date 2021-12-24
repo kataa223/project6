@@ -1,27 +1,24 @@
-# 課題6-2：任意のキーワードでAPI検索した場合
-
-#coding:utf-8
-import csv
+# ------------------------------------------------------------------
+# 課題6-2：任意のキーワードで検索したときの、商品名と価格の一覧を取得
+# ------------------------------------------------------------------
 import sys
-import codecs
-import math
-import random
 import requests
-from time import sleep
-import re
+
+RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
+APP_ID = '###'
 
 args = sys.argv
 keyWord = args[1]
 
 url = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
 payload = {
-    'applicationId': 1056775690377075202,
+    'applicationId': APP_ID,
     'hits': 30,#一度のリクエストで返してもらう最大個数（MAX30)
     'keyword': keyWord ,#検索するキーワード
     'page':1,#何ページ目か
     'postageFlag':1,#送料込みの商品に限定
     }
-r = requests.get(url, params=payload)
+r = requests.get(RAKUTEN_API_URL, params=payload)
 resp = r.json()
 
 counter = 0
