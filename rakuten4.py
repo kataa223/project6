@@ -25,5 +25,8 @@ for items in resp['Items']:
     result += '【rank】' + str(item['rank']) + "\n"
     result += '【itemName】' + item['itemName'] + "\n"
     result += '【itemCode】' + item['itemCode'] + "\n"
-    
+
 # csv出力
+with open("ranking.csv", "a", encoding="utf-8") as f:
+    f.write(f',{result}')
+
