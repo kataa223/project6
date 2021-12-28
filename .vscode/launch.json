@@ -10,7 +10,9 @@
       "request": "launch",
       "program": "${file}",
       "console": "integratedTerminal",
-      "args": ["302863"]
+      // "args": ["yamada3838"] //ショップCode
+      // "args": ["炊飯器"] //検索ワード
+      "args": ["565161"] //ジャンルID
     }
   ]
 }

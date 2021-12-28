@@ -5,12 +5,16 @@ import sys
 import requests
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+from dotenv import load_dotenv
+load_dotenv()
+import os
+import fire
 
 # 接続情報など
+SHEET_NAME = 'test'
+APP_ID = os.getenv('RAKUTEN_API_KEY')
 SPREADSHEET_KEY_PATH = 'D:/Python/project6/key/thematic-cursor-336014-0b37a4afb843.json'
 RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628'
-SHEET_NAME = 'test'
-APP_ID = '###'
 
 # スプレッドシートへの出力機能
 def write_spreadsheet(vlist):
@@ -36,9 +40,14 @@ def write_spreadsheet(vlist):
 def get_ranking(genreId):
     payload = {
         'applicationId': APP_ID,
-        'genreId': genreId ,#ジャンルID
+        'genreId': genreId ,        # ジャンルID
         }
     r = requests.get(RAKUTEN_API_URL, params=payload)
+    try:
+        r.raise_for_status()
+    except Exception as e:
+        print(f'APIエラー: detail={e}')
+        return None    
     resp = r.json()
 
     result = []
@@ -50,15 +59,16 @@ def get_ranking(genreId):
         result.append('【itemCode】' + item['itemCode'])
       
     return result
-        
-        
-if __name__ == "__main__":
-    # コマンドライン引数を取得
-    args = sys.argv
-    genreId = args[1]
+
+def main(arg1):
+    genreId = arg1
     
     # ランキングを取得
     ranking = get_ranking(genreId)
-    # スプレッドシートに出力
+    # スプレッドシートに取得結果を出力
     write_spreadsheet(ranking)
+        
+        
+if __name__ == "__main__":
+    fire.Fire(main)
     
