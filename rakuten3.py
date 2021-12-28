@@ -11,9 +11,7 @@ import fire
 APP_ID = os.getenv('RAKUTEN_API_KEY')
 RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/Product/Search/20170426'
 
-def main(arg1):
-    keyWord = arg1
-
+def main(keyWord):
     payload = {
         'applicationId': APP_ID,
         'keyword': keyWord ,        # 検索するキーワード

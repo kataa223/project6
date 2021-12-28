@@ -56,13 +56,11 @@ def get_ranking(genreId):
         result.append("-------------------------------------------")
         result.append('【rank】' + str(item['rank']))
         result.append('【itemName】' + item['itemName'])
-        result.append('【itemCode】' + item['itemCode'])
-      
+        result.append('【itemCode】' + item['itemCode']) 
     return result
 
-def main(arg1):
-    genreId = arg1
-    
+
+def main(genreId):
     # ランキングを取得
     ranking = get_ranking(genreId)
     # スプレッドシートに取得結果を出力

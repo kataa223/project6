@@ -12,9 +12,7 @@ import fire
 APP_ID = os.getenv('RAKUTEN_API_KEY')
 RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628'
 
-def main(arg1):
-    genreId = arg1
-
+def main(genreId):
     payload = {
         'applicationId': APP_ID,
         'genreId': genreId ,        # ジャンルID

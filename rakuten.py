@@ -11,9 +11,7 @@ import fire
 APP_ID = os.getenv('RAKUTEN_API_KEY')
 RAKUTEN_API_URL = 'https://app.rakuten.co.jp/services/api/IchibaItem/Search/20170706'
 
-def main(arg1):
-    shopCode = arg1
-
+def main(shopCode):
     payload = {
         'applicationId': APP_ID,
         'hits': 30,                 # 一度のリクエストで返してもらう最大個数（MAX30)
